@@ -5,6 +5,7 @@ function wordCount(element) {
   return element.length;
 }
 
+// Major tom lyrics
 let songString = `Ground Control to Major Tom
 Ground Control to Major Tom
 Take your protein pills and put your helmet on
@@ -15,62 +16,53 @@ Check ignition and may God's love be with you (Two, One, Liftoff).`;
 
 // regex
 function textArray(string) {
-  var regex = /[,'().]/g;
-  var rmLineBreak = /[\n\r]+/g
+  var regex = /[,'().?\n|\r]/g;
+  var rmLineBreak = /[\n\r]+/g;
   return string.replace(regex, '').replace(rmLineBreak, ' ').toLowerCase().split(' ');
-};
-
-
-
+}
 
 // unique word count
 function uniqueWordCount(string) {
-  // change string into uniqueWords
   let uniqueWords = [];
-  for (let i = 0; i <= element.length; i++) {
-    if (element === element[i]) {
-      uniqueWords.push(element[i]);
+  for (let i = 0; i < string.length; i++) {
+    if(uniqueWords.indexOf(string[i]) === -1) {
+      uniqueWords.push(string[i]);
     }
   }
-
-
-  // if this matches this, push
-  // else ignore
-  return array.length
-
+  return uniqueWords.length;
 }
-
 
 // Average word length
-
 function averageWordLength(element) {
-  // get length of each word
-  // divide that by array.length
-
+  var wordCount = element.length;
+  var words = element.join('').length;
+  var total = words/wordCount;
+  var roundDown = Math.floor(total* 100)/100; 
+  return roundDown;
 }
 
-function bob(){
-  $('form').on('submit', function(event) {
+function bob() {
+  $('form').on('submit', function (event) {
     event.preventDefault();
 
     // remove hidden classes
-    $(".text-report").removeClass('hidden');
-
-    // add the results to html
+    $('.text-report').removeClass('hidden');
 
     // create and add unique class to dd
-
     // console.log($('text-report dd:nth-child(2)'));
 
     // what input is
     let input = textArray($('#user-text').val());
-    console.log('wordcount: ' + wordCount(input));
+    // console.log('wordcount: ' + wordCount(input));
 
-    // add unique class to dd
-    $('.js-wordCount').text(wordCount(input))
-  })
-};
+    // add to browser
+    $('.js-wordCount').text(wordCount(input));
+    $('.js-uniqueCount').text(uniqueWordCount(input));
+    $('.js-avgWordLength').text(averageWordLength(input) + ' characters');   
+  });
+}
 
-$(function() {
-  bob()
-})
+// when page finishes loading, run this
+$(function () {
+  bob();
+});

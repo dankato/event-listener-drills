@@ -51,4 +51,14 @@ $('#number-chooser').on('submit', function(event) {
 });
 
 
-// Lightbulb save for later
+// Lightbulb Toggle
+
+$( function() {
+	var bulbs = $(".js-lightbulb"); // grabbing all bulbs and assigning it as a var
+
+	bulbs.on('click', function(event) { //when any of the bulbs are clicked on, run function
+		bulbs.removeClass('bulb-on'); // remove bulb-on on all bulbs
+		$(event.currentTarget).addClass('bulb-on'); // select the current target and add the bulb-on class
+	});
+	
+})
